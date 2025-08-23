@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentsService } from '../../services/departments';
 import { Department } from '../../interfaces/department';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core'
 
 @Component({
   selector: 'app-departments',
@@ -9,10 +11,16 @@ import { Department } from '../../interfaces/department';
   styleUrl: './departments.scss',
 })
 export class Departments implements OnInit {
-	constructor(private departmentsService: DepartmentsService) { }
-	departments!: Array<Department>;
+  departments!: Array<Department>;
 
-	ngOnInit(): void {
-		this.departments = this.departmentsService.deparments;
-	}
+  private departmentsService: DepartmentsService = inject(DepartmentsService);
+  private router: Router = inject(Router);
+
+  ngOnInit(): void {
+    this.departments = this.departmentsService.deparments;
+  }
+
+  goToDepartment(departmentId: string) {
+    this.router.navigate(['./timesheet', {id: departmentId}]);
+  }
 }
