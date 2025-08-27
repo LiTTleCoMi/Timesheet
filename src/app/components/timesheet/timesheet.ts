@@ -17,6 +17,15 @@ export class Timesheet implements OnInit {
   employeeNameFC = new FormControl('', this.nameValidator());
   employees: Array<Employee> = [];
   employeeId = 0;
+  weekdays: Array<string> = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
 
   private router = inject(ActivatedRoute);
   private departmentsService = inject(DepartmentsService);
@@ -43,18 +52,38 @@ export class Timesheet implements OnInit {
     };
   }
 
-  addEmployee() {
-    if (!this.employeeNameFC.value) return;
+  addEmployee(): void {
+    if (this.employeeNameFC.value) {
+      this.employeeId++;
 
-    this.employeeId++;
+      this.employees.push({
+        id: this.employeeId.toString(),
+        departmentId: this.department?.id,
+        name: this.employeeNameFC.value,
+        payRate: Math.floor(Math.random() * 50) + 50,
+        monday: 0,
+        tuesday: 0,
+        wednesday: 0,
+        thursday: 0,
+        friday: 0,
+        saturday: 0,
+        sunday: 0,
+      });
 
-    this.employees.push({
-      id: this.employeeId.toString(),
-      departmentId: this.department?.id,
-      name: this.employeeNameFC.value,
-      payRate: Math.floor(Math.random() * 51) + 50,
-    });
+      this.employeeNameFC.setValue('');
+    }
+  }
 
-    this.employeeNameFC.setValue('');
+  getTotalHours(employee: Employee): number {
+    console.log(employee);
+    return (
+      employee.monday +
+      employee.tuesday +
+      employee.wednesday +
+      employee.thursday +
+      employee.friday +
+      employee.saturday +
+      employee.sunday
+    );
   }
 }
