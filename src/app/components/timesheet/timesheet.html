@@ -4,21 +4,23 @@
     <h2>{{ department.name }}</h2>
 
     <mat-card>
-      <mat-form-field>
-        <input matInput [formControl]="employeeNameFC" placeholder="Employee Name" type="text" />
-        @if (employeeNameFC.hasError('duplicate')) {
-        <mat-error>Duplicate Name</mat-error>
-        }
-      </mat-form-field>
+      <div class="employee-input">
+        <mat-form-field>
+          <input matInput [formControl]="employeeNameFC" placeholder="Employee Name" type="text" />
 
-      <button
-        mat-mini-fab
-        color="primary"
-        (click)="addEmployee()"
-        [disabled]="employeeNameFC.invalid"
-      >
-        <mat-icon>add</mat-icon>
-      </button>
+          @if (employeeNameFC.hasError('duplicate')) {
+          <mat-error>Duplicate Name</mat-error>
+          }
+        </mat-form-field>
+
+        <button
+          mat-mini-fab
+          (click)="addEmployee()"
+          [disabled]="employeeNameFC.invalid"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </mat-card>
 
     <mat-card class="hours">
@@ -38,7 +40,12 @@
             <td>{{ employee.name }}</td>
             @for (day of weekdays; track $index) {
             <td>
-              <input type="number" [id]="day" [(ngModel)]="employee[day.toLowerCase()]" class="hours-input" />
+              <input
+                type="number"
+                [id]="day"
+                [(ngModel)]="employee[day.toLowerCase()]"
+                class="hours-input"
+              />
             </td>
             }
             <td class="total-cell">{{ getTotalHours(employee) }}</td>
