@@ -74,6 +74,10 @@ export class Timesheet implements OnInit {
     }
   }
 
+  deleteEmployee(index: number): void {
+    this.employees.splice(index, 1);
+  }
+
   getTotalHours(employee: Employee): number {
     console.log(employee);
     return (

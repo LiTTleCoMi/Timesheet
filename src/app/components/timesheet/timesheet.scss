@@ -1,4 +1,4 @@
-$add: rgb(23, 224, 127);
+$add: #3F51B5;
 
 h2 {
   text-align: center;
@@ -8,18 +8,26 @@ h2 {
   margin: auto;
 }
 
+mat-card {
+	padding: 15px;
+}
+
 .employee-input {
   display: flex;
   align-items: center;
+  gap: 15px;
 
   mat-form-field {
     flex: 1;
+	background-color: none !important;
   }
 
   button {
-	margin: 10px;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
 	background-color: $add;
-	color: black;
+	color: white;
   }
 }
 
@@ -39,4 +47,25 @@ h2 {
 
 .total-cell {
   text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border-bottom: 1px solid black;
+
+    &:not(:first-child) {
+        padding-left: 15px;
+    }
+}
+
+td {
+    text-align: center;
+    padding: 10px 0px;
+}
+
+tr td {
+    border-bottom: 1.5px solid #C1C1C1;
 }
