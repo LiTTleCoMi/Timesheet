@@ -2,8 +2,8 @@
   <table>
     <thead>
       <th>Name</th>
-      @for (weekday of weekdays; track $index) {
-      <th>{{ weekday }}</th>
+      @for (day of weekdays; track $index) {
+      <th>{{ day | titlecase }}</th>
       }
       <th>Total Hours</th>
       <th>Pay Rate</th>
@@ -14,10 +14,10 @@
       @for (employee of departmentEmployees; track $index) {
       <tr>
         <td>{{ employee.name }}</td>
-        @for (weekday of weekdays; track $index){
-        <td>{{ employee[weekday] }}</td>
+        @for (day of weekdays; track $index){
+        <td>{{ employee[day] | number : '1.2-2' }}</td>
         }
-        <td class="total-cell">{{ getTotalHours(employee) }}</td>
+        <td class="total-cell">{{ getTotalHours(employee) | number : '1.2-2' }}</td>
         <td>{{ employee.payRate | currency: 'USD'}}/hr</td>
         <td>{{ employee.payRate * getTotalHours(employee) | currency: 'USD' }}</td>
       </tr>

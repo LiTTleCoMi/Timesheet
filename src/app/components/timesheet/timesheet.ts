@@ -18,13 +18,13 @@ export class Timesheet implements OnInit {
   employees: Array<EmployeeInterface> = [];
   employeeId = 0;
   weekdays: Array<string> = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
   ];
 
   private router = inject(ActivatedRoute);

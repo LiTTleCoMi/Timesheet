@@ -25,7 +25,7 @@
         <thead>
           <th>Name</th>
           @for (day of weekdays; track $index) {
-          <th>{{ day }}</th>
+          <th>{{ day | titlecase }}</th>
           }
           <th>Total Hours</th>
           <th></th>
@@ -40,7 +40,7 @@
               <input
                 type="number"
                 [id]="day"
-                [(ngModel)]="employee[day.toLowerCase()]"
+                [(ngModel)]="employee[day]"
                 class="hours-input"
               />
             </td>
