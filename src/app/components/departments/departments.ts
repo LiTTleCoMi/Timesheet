@@ -10,15 +10,11 @@ import { inject } from '@angular/core';
   templateUrl: './departments.html',
   styleUrl: './departments.scss',
 })
-export class Departments implements OnInit {
-  departments!: Array<DepartmentInterface>;
-
+export class Departments {
   private departmentsService: DepartmentsService = inject(DepartmentsService);
   private router: Router = inject(Router);
 
-  ngOnInit(): void {
-    this.departments = this.departmentsService.deparments;
-  }
+  departments$ = this.departmentsService.departments$;
 
   goToDepartment(departmentId: string) {
     this.router.navigate(['./timesheet', { id: departmentId }]);

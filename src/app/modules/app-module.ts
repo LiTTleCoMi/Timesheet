@@ -11,10 +11,11 @@ import { Timesheet } from '../components/timesheet/timesheet';
 import { TopNavbar } from '../components/top-navbar/top-navbar';
 import { MaterialModule } from './material-module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [App, Departments, Analytics, AnalyticsTable, Timesheet, TopNavbar],
-  imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, HttpClientModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })

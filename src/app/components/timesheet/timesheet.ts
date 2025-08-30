@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DepartmentInterface } from '../../interfaces/department.interface';
 import { DepartmentsService } from '../../services/departments.service';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { EmployeeInterface } from '../../interfaces/employee.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-timesheet',
@@ -11,12 +12,18 @@ import { EmployeeInterface } from '../../interfaces/employee.interface';
   templateUrl: './timesheet.html',
   styleUrl: './timesheet.scss',
 })
-export class Timesheet implements OnInit {
-  private departments: Array<DepartmentInterface> | undefined;
+export class Timesheet implements OnInit, OnDestroy {
+  private router = inject(ActivatedRoute);
+  private departmentsService = inject(DepartmentsService);
+
+  departments$ = this.departmentsService.departments$;
+
+  private departmentsSubscription!: Subscription;
   department: DepartmentInterface | undefined;
-  employeeNameFC = new FormControl('', this.nameValidator());
   employees: Array<EmployeeInterface> = [];
   employeeId = 0;
+
+  employeeNameFC = new FormControl('', this.nameValidator());
   weekdays: Array<string> = [
     'monday',
     'tuesday',
@@ -27,14 +34,18 @@ export class Timesheet implements OnInit {
     'sunday',
   ];
 
-  private router = inject(ActivatedRoute);
-  private departmentsService = inject(DepartmentsService);
-
   ngOnInit(): void {
-    this.departments = this.departmentsService.deparments;
-    this.department = this.departments.find(
-      (department) => department.id === this.router.snapshot.params['id']
-    );
+    this.departmentsSubscription = this.departments$.subscribe((departments) => {
+      this.department = departments.find(
+        (department) => department.id === this.router.snapshot.params['id']
+      );
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.departmentsSubscription) {
+      this.departmentsSubscription.unsubscribe();
+    }
   }
 
   nameValidator(): ValidatorFn {
