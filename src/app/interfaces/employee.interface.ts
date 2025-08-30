@@ -1,4 +1,4 @@
-export interface Employee {
+export interface EmployeeInterface {
   [key: string]: string | undefined | number;
 
   id: string;

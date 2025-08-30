@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatError, MatInput, MatLabel } from '@angular/material/input';
 import { MatFormField } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatError,
     MatLabel,
+    MatTabsModule,
   ],
   exports: [
     MatToolbarModule,
@@ -35,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatError,
     MatLabel,
+    MatTabsModule,
   ],
 })
 export class MaterialModule {}

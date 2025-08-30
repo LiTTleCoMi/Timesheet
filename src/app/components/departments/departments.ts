@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentsService } from '../../services/departments';
-import { Department } from '../../interfaces/department';
+import { DepartmentsService } from '../../services/departments.service';
+import { DepartmentInterface } from '../../interfaces/department.interface';
 import { Router } from '@angular/router';
-import { inject } from '@angular/core'
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-departments',
@@ -11,7 +11,7 @@ import { inject } from '@angular/core'
   styleUrl: './departments.scss',
 })
 export class Departments implements OnInit {
-  departments!: Array<Department>;
+  departments!: Array<DepartmentInterface>;
 
   private departmentsService: DepartmentsService = inject(DepartmentsService);
   private router: Router = inject(Router);
@@ -21,6 +21,6 @@ export class Departments implements OnInit {
   }
 
   goToDepartment(departmentId: string) {
-    this.router.navigate(['./timesheet', {id: departmentId}]);
+    this.router.navigate(['./timesheet', { id: departmentId }]);
   }
 }

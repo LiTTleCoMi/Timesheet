@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Department } from '../../interfaces/department';
-import { DepartmentsService } from '../../services/departments';
+import { DepartmentInterface } from '../../interfaces/department.interface';
+import { DepartmentsService } from '../../services/departments.service';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
-import { Employee } from '../../interfaces/employee';
+import { EmployeeInterface } from '../../interfaces/employee.interface';
 
 @Component({
   selector: 'app-timesheet',
@@ -12,10 +12,10 @@ import { Employee } from '../../interfaces/employee';
   styleUrl: './timesheet.scss',
 })
 export class Timesheet implements OnInit {
-  private departments: Array<Department> | undefined;
-  department: Department | undefined;
+  private departments: Array<DepartmentInterface> | undefined;
+  department: DepartmentInterface | undefined;
   employeeNameFC = new FormControl('', this.nameValidator());
-  employees: Array<Employee> = [];
+  employees: Array<EmployeeInterface> = [];
   employeeId = 0;
   weekdays: Array<string> = [
     'Monday',
@@ -78,7 +78,7 @@ export class Timesheet implements OnInit {
     this.employees.splice(index, 1);
   }
 
-  getTotalHours(employee: Employee): number {
+  getTotalHours(employee: EmployeeInterface): number {
     console.log(employee);
     return (
       employee.monday +
